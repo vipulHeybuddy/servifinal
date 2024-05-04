@@ -11,3 +11,6 @@ export function addToBasketSuccess(product) {
     product,
   };
 }
+
+export const TOGGLE_MODAL = "TOGGLE_MODAL";
+

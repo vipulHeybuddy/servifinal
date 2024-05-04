@@ -1,30 +1,51 @@
-import React, { useState } from 'react';
-import { View, FlatList, TouchableOpacity, Modal, Text, StyleSheet, TextInput, Button, Alert, DatePickerIOS, TimePickerAndroid, Platform, ActionSheetIOS } from 'react-native';
-import restaurants from '../../../assets/data/restaurants';
-import { Ionicons } from '@expo/vector-icons';
-import { MaterialCommunityIcons } from '@expo/vector-icons'; // Import MaterialCommunityIcons
-import DishListItem from '../../components/DishListItem';
-import Header from './Header';
-import { styles } from './styles';
-import { useRoute, useNavigation } from '@react-navigation/native';
+import React, { useState } from "react";
+import {
+  View,
+  FlatList,
+  TouchableOpacity,
+  Modal,
+  Text,
+  StyleSheet,
+  TextInput,
+  Button,
+  Alert,
+  TimePickerAndroid,
+  Platform,
+  ActionSheetIOS,
+} from "react-native";
+import restaurants from "../../../assets/data/restaurants";
+import { Ionicons } from "@expo/vector-icons";
+import { MaterialCommunityIcons } from "@expo/vector-icons"; // Import MaterialCommunityIcons
+import DishListItem from "../../components/DishListItem";
+import Header from "./Header";
+import { styles } from "./styles";
+import { useRoute, useNavigation } from "@react-navigation/native";
+import { FontAwesome } from '@expo/vector-icons'; // Import FontAwesome for the mic icon
+import BookingScreen from '../BookigScreen';
 
 const RestaurantDetailsScreen = () => {
+  const [modalVisible, setModalVisible] = useState(false);
+  const [bookingModalVisible, setBookingModalVisible] = useState(false);
   const route = useRoute();
   const navigation = useNavigation();
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [numberOfPeople, setNumberOfPeople] = useState(1);
-  const [date, setDate] = useState(new Date());
-  const [time, setTime] = useState('');
+  const [selectedDate, setSelectedDate] = useState("");
+  const [selectedTime, setSelectedTime] = useState("");
 
-  const { id } = route.params;
-  const restaurant = restaurants.find((r) => r.id === id);
+  const { id , category } = route.params;
+  let restaurant = restaurants.find((r) => r.id == id);
+  
+  // if(category){
+  //  restaurant =  restaurant.find((r) => r.category == category)
+  // }
 
   const toggleModal = () => {
     setIsModalVisible(!isModalVisible);
   };
 
   const handleTimePicker = async () => {
-    if (Platform.OS === 'android') {
+    if (Platform.OS === "android") {
       try {
         const { action, hour, minute } = await TimePickerAndroid.open({
           hour: 12,
@@ -33,10 +54,10 @@ const RestaurantDetailsScreen = () => {
         });
         if (action !== TimePickerAndroid.dismissedAction) {
           const selectedTime = `${hour}:${minute}`;
-          setTime(selectedTime);
+          setSelectedTime(selectedTime);
         }
       } catch ({ code, message }) {
-        console.warn('Cannot open time picker', message);
+        console.warn("Cannot open time picker", message);
       }
     }
   };
@@ -45,7 +66,7 @@ const RestaurantDetailsScreen = () => {
     const options = Array.from({ length: 8 }, (_, i) => `${i + 1}`);
     ActionSheetIOS.showActionSheetWithOptions(
       {
-        options: [...options, 'Cancel'],
+        options: [...options, "Cancel"],
         cancelButtonIndex: options.length,
       },
       (buttonIndex) => {
@@ -56,8 +77,12 @@ const RestaurantDetailsScreen = () => {
     );
   };
 
+  const handleSelectDate = () => {
+    // Implement your custom date picker logic here
+  };
+
   const handleSelectTime = () => {
-    const timeOptions = ['4 PM', '7 PM', '8 PM', 'Cancel'];
+    const timeOptions = ["4 PM", "7 PM", "8 PM", "Cancel"];
     ActionSheetIOS.showActionSheetWithOptions(
       {
         options: timeOptions,
@@ -65,14 +90,14 @@ const RestaurantDetailsScreen = () => {
       },
       (buttonIndex) => {
         if (buttonIndex !== timeOptions.length - 1) {
-          setTime(timeOptions[buttonIndex]);
+          setSelectedTime(timeOptions[buttonIndex]);
         }
       }
     );
   };
 
   const handleSubmit = () => {
-    Alert.alert('Success', 'Table successfully booked!');
+    Alert.alert("Success", "Table successfully booked!");
   };
 
   if (!restaurant) {
@@ -99,15 +124,12 @@ const RestaurantDetailsScreen = () => {
           color="#151515"
           style={styles.icon}
         />
-        <TouchableOpacity
-          onPress={toggleModal}
-          style={styles.floatingButton}
-        >
+        <TouchableOpacity onPress={toggleModal} style={styles.floatingButton1}>
           <MaterialCommunityIcons
-              onPress={toggleModal}
-              name="bell"
-              size={34}
-              color="white"
+            onPress={toggleModal}
+            name="bell"
+            size={34}
+            color="white"
           />
         </TouchableOpacity>
       </View>
@@ -117,8 +139,8 @@ const RestaurantDetailsScreen = () => {
         transparent={true}
         onRequestClose={toggleModal}
       >
-        <View style={styles.modalContainer}>
-          <View style={styles.modalContent}>
+        <View style={styles.modalContainer1}>
+          <View style={styles.modalContent1}>
             <Text style={styles.modalTitle}>Book a Seat</Text>
             <TouchableOpacity
               onPress={toggleModal}
@@ -132,29 +154,52 @@ const RestaurantDetailsScreen = () => {
             >
               <Text>Number of People: {numberOfPeople}</Text>
             </TouchableOpacity>
-            {Platform.OS === 'ios' ? (
-              <DatePickerIOS
-                date={date}
-                onDateChange={setDate}
-                mode="date"
-                style={styles.input}
-              />
-            ) : null}
-            <TouchableOpacity
-              onPress={handleSelectTime}
-              style={styles.input}
-            >
-              <Text>{time ? `Selected Time: ${time}` : 'Select Time'}</Text>
+            <TouchableOpacity onPress={handleSelectDate} style={styles.input}>
+              <Text>{selectedDate ? `Selected Date: ${selectedDate}` : "Select Date"}</Text>
             </TouchableOpacity>
-            <Button
-              title="Submit"
-              onPress={handleSubmit}
-            />
+            <TouchableOpacity onPress={handleSelectTime} style={styles.input}>
+              <Text>{selectedTime ? `Selected Time: ${selectedTime}` : "Select Time"}</Text>
+            </TouchableOpacity>
+            <Button title="Submit" onPress={handleSubmit} />
           </View>
         </View>
       </Modal>
+      
+      <TouchableOpacity
+        style={[styles.floatingButton, { backgroundColor: 'orange' }]} // Orange background
+        onPress={() => setBookingModalVisible(true)}
+      >
+        <Text style={{ color: 'white', fontSize: 20, textAlign: 'center' }}>
+          <FontAwesome name="microphone" size={24} color="white" /> {/* Mic icon */}
+        </Text>
+      </TouchableOpacity>
+
+      <Modal 
+        visible={bookingModalVisible} 
+        transparent
+        animationType="fade" // Add fade animation for a smoother transition
+        onRequestClose={() => setBookingModalVisible(false)}
+      >
+        <TouchableOpacity 
+          style={[styles.modalContainer, { justifyContent: 'center', alignItems: 'center' }]}
+          activeOpacity={1}
+          onPress={() => setBookingModalVisible(false)}
+        >
+          <View style={styles.bookingModalContent}>
+            <BookingScreen />
+            <TouchableOpacity
+              style={styles.closeButton}
+              onPress={() => setBookingModalVisible(false)}
+            >
+              <Text style={{ color: 'white', fontSize: 16 }}>Close</Text>
+            </TouchableOpacity>
+          </View>
+        </TouchableOpacity>
+      </Modal>
     </View>
   );
-}
+};
+
 
 export default RestaurantDetailsScreen;
+

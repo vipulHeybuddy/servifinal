@@ -1,0 +1,80 @@
+[{
+    "id": "1",
+    "name": "El Cabo Coffe Bar Tres De Mayo",
+    "deliveryFee": 1.40,
+    "minDeliveryTime": 25,
+    "category": "italian",
+    "maxDeliveryTime": 35,
+    "rating": 4.0,
+    "image": "https://notjustdev-dummy.s3.us-east-2.amazonaws.com/uber-eats/restaurant1.jpeg",
+    "dishes": [
+      {
+        "id": "1",
+        "name": "Cheese Steak",
+        "description": "6 pieces of chese with sauce.",
+        "price": 6.90,
+        "image": "https://notjustdev-dummy.s3.us-east-2.amazonaws.com/uber-eats/restaurant2.jpeg"
+      },
+      {
+        "id": "2",
+        "name": "Hamburger La Super Cabo Burger",
+        "description": "Double meat, gouda cheese, cheddar cheese, cooked ham, bacon, egg, salad and rustic potatoes.",
+        "price": 8.90,
+        "image": "https://notjustdev-dummy.s3.us-east-2.amazonaws.com/uber-eats/restaurant3.jpeg"
+      },
+      {
+        "id": "3",
+        "name": "U.S.A. Burger",
+        "description": "Beef, gouda cheese, cheddar cheese, cooked ham, bacon, egg and salad.",
+        "price": 5.40
+      },
+      {
+        "id": "4",
+        "name": "Slices of Llanero Cheese",
+        "description": "Ripe plantain with cheese and palm honey.",
+        "price": 5.90
+      },
+      {
+        "id": "5",
+        "name": "Papas Locas El Cabo",
+        "description": "French fries with shredded chicken, gouda cheese and ham.",
+        "price": 7.90
+      }
+    ]
+  }, {
+    "id": "4",
+    "name": "Hamburguesa Nostra La Salle",
+    "deliveryFee": 0.90,
+    "minDeliveryTime": 30,
+    "category": "italian",
+    "maxDeliveryTime": 40,
+    "rating": 4.5,
+    "image": "https://notjustdev-dummy.s3.us-east-2.amazonaws.com/uber-eats/restaurant4.jpeg",
+    "dishes": [
+      {
+        "name": "English burger",
+        "description": "Beef with bacon, portobello mushrooms, tomato, cheddar cheese, grilled egg and our smoked sauce.",
+        "price": 14.90     
+      },
+      {
+        "name": "Mexican Burger",
+        "description": "Beef, with pico de gallo, veggie chili, cheddar cheese, guacamole and smoked sauce.",
+        "price": 14.90     
+      },
+      {
+        "name": "Tequeños",
+        "description": "Crispy sticks filled with melted cheese accompanied by tomato chutney.",
+        "price": 9.90    
+      },
+      {
+        "name": "Starters Combo",
+        "description": "Tequeños, crispy onion and chicken delicacies.",
+        "price": 13.90    
+      },
+      {
+        "name": "Cesar Salad",
+        "description": "Green sprouts, pieces of grilled bacon, chicken delicacies, grated Parmesan, muffin croutons and fried onion confetti dressed with Caesar sauce.",
+        "price": 10.50     
+      }
+    ]
+  }]

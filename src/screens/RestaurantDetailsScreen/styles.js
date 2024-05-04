@@ -59,13 +59,13 @@ export const styles = StyleSheet.create({
     marginTop: 20,
     marginLeft: 10,
   },
-  modalContainer: {
+  modalContainer1: {
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: 'rgba(0, 0, 0, 0.5)',
   },
-  modalContent: {
+  modalContent1: {
     backgroundColor: 'white',
     borderRadius: 10,
     padding: 20,
@@ -83,7 +83,20 @@ export const styles = StyleSheet.create({
   },
   floatingButton: {
     position: 'absolute',
-    top: 620,
+    top: 700,
+    left: 320,
+    backgroundColor: '#e47911',
+    width: 60,
+    height: 60,
+    borderRadius: 30,
+    justifyContent: 'center',
+    alignItems: 'center',
+   elevation: 15,
+  },
+
+  floatingButton1: {
+    position: 'absolute',
+    top: 600,
     left: 310,
     backgroundColor: '#e47911',
     width: 60,
@@ -91,6 +104,38 @@ export const styles = StyleSheet.create({
     borderRadius: 30,
     justifyContent: 'center',
     alignItems: 'center',
-    elevation: 3,
+   elevation: 15,
   },
+  modalContainer: {
+    flex: 1,
+    backgroundColor: 'rgba(0, 0, 0, 0.5)',
+  },
+  modalContent: {
+    backgroundColor: 'white',
+    borderRadius: 20,
+    padding: 20,
+    width: '80%', 
+    height: '100%',
+    marginTop: 120,
+    // Set a specific width for the modal content
+    maxWidth: 300, // Limit the maximum width of the modal content
+  },
+  bookingModalContent: {
+    backgroundColor: 'rgba(255, 255, 255, 0.9)',
+    borderRadius: 20,
+    marginTop: 220,
+    padding: 20,
+    elevation: 5,
+    width: '80%', 
+    height: '50%',
+    // Set a specific width for the modal content
+    maxWidth: 300, // Limit the maximum width of the modal content
+  },
+  closeButton: {
+    position: 'absolute',
+    top: 10,
+    right: 10,
+    padding: 10,
+  },
+
 });

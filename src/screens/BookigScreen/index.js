@@ -15,6 +15,7 @@ import { Ionicons } from "@expo/vector-icons"; // Import Ionicons library for ar
 import { router } from "expo-router";
 import useVoiceCommands from "../../hooks/useVoiceCommands";
 
+
 const Message = ({ message, isUser, isResponse }) => {
   return (
     <View
@@ -48,21 +49,27 @@ const BookingScreen = () => {
   const handleQuerySubmit = async () => {
     try {
       const requestBody = {
+        // attachments: [],
+        // channel: "dashboard",
+        // conversationId: "clvi1bolz000m356vwathvnn6",
+        // query: query,
+        // streaming: false,
+        // visitorId: "clvdsn5wm1nqa8io935om3cpn",
         attachments: [],
-        channel: "dashboard",
-        conversationId: "clvi1bolz000m356vwathvnn6",
-        query: query,
-        streaming: false,
-        visitorId: "clvdsn5wm1nqa8io935om3cpn",
+          channel: "dashboard",
+          conversationId: "clvpbcwav000o356x916p2ft6",
+          query: query,
+          streaming: false,
+          visitorId: "clvpbcwzg3bpz8iq0267z0j74",
       };
 
       const response = await fetch(
-        "https://app.chaindesk.ai/api/agents/clvdsmokq048xo98i7alua5e5/query",
+        "https://app.chaindesk.ai/api/agents/clvpbcsmk077so98i7rs9ubck/query",
         {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
-            Authorization: "Bearer bf2270ca-68b3-4a98-81ea-6c661a8667bb",
+            Authorization: "Bearer 1738fc43-25a5-4877-94ab-b61a8c771adf",
           },
           body: JSON.stringify(requestBody),
         }
@@ -166,3 +173,4 @@ const BookingScreen = () => {
 };
 
 export default BookingScreen;
+

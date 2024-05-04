@@ -8,6 +8,8 @@ const RestaurantItem = ({restaurant}) => {
   const onPress = () => {
     navigation.navigate('Restaurant', {id: restaurant.id});
   };
+
+  console.log("ITEM PAGE")
   return (
     <Pressable onPress={onPress} style={styles.restaurantItem}>
       <Image
