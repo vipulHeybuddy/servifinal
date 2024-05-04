@@ -4,7 +4,7 @@ import { createMaterialBottomTabNavigator } from '@react-navigation/material-bot
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 
 import LoginScreen from '../screens/LoginScreen';
-import SignupScreen from '../screens/SignupScreen';
+// import SignupScreen from '../screens/SignupScreen';
 import HomeScreen from '../screens/HomeScreen';
 import RestaurantDetailsScreen from '../screens/RestaurantDetailsScreen';
 import BasketScreen from '../screens/BasketScreen';
@@ -19,9 +19,9 @@ const Navigation = () => {
   return (
     <Stack.Navigator initialRouteName="Login">
       <Stack.Screen name="Login" component={LoginScreen} />
-      <Stack.Screen name="Signup" component={SignupScreen} />
+      {/* <Stack.Screen name="Signup" component={SignupScreen} /> */}
       <Stack.Screen name="Delivery" component={TabNavigation} options={{ headerShown: false }} />
-      <Stack.Screen name="Dish" component={DishDetailsScreen} />
+      {/* <Stack.Screen name="Dish" component={DishDetailsScreen} /> */}
       <Stack.Screen name="Basket" component={BasketScreen} />
       <Stack.Screen name="Orders" component={OrdersScreen} />
       <Stack.Screen name="OrderDetails" component={OrderDetailsScreen} />

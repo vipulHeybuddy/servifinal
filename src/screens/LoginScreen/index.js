@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { View, Text, TextInput, TouchableOpacity, Image, Alert } from 'react-native';
 import { styles } from './styles';
-import { Link, router } from 'expo-router';
+// import { Link, router } from 'expo-router';
 
 
 export default function LoginScreen() {
@@ -28,7 +28,7 @@ export default function LoginScreen() {
           Alert.alert('Login Failed', data.data.msg);
         } else {
           Alert.alert('Login Successful', 'You have successfully logged in!');
-          router.push('/home/HomeScreen')
+          // router.push('/home/HomeScreen')
         }
       })
       .catch(error => {
@@ -40,10 +40,10 @@ export default function LoginScreen() {
 
   return (
     <View style={styles.container}>
-      <Image
+      {/* <Image
         source={require('../../assets/logo.png')}
         style={styles.logo}
-      />
+      /> */}
       <Text style={styles.appName}>SERVI!</Text>
       <Text style={styles.tagline}>A REVOLUTION IN DINING</Text>
 
@@ -69,15 +69,15 @@ export default function LoginScreen() {
         <TouchableOpacity style={styles.loginButton} onPress={handleLogin}>
           <Text style={styles.loginButtonText}>Login</Text>
         </TouchableOpacity>
-        <Text style={styles.registerText}>Don't have an account? <Link href='registerpage/RegisterScreen/'> Register now </Link></Text>
+        <Text style={styles.registerText}>Don't have an account?</Text>
       </View>
 
       <View style={styles.socialLoginContainer}>
         <TouchableOpacity style={[styles.socialLoginButton, styles.googleButton]}>
-          <Image source={require('../../assets/google.png')} style={styles.socialLoginLogo} />
+          {/* <Image source={require('../../assets/google.png')} style={styles.socialLoginLogo} />
         </TouchableOpacity>
         <TouchableOpacity style={[styles.socialLoginButton, styles.appleButton]}>
-          <Image source={require('../../assets/Apple.png')} style={styles.socialLoginLogo} />
+          <Image source={require('../../assets/Apple.png')} style={styles.socialLoginLogo} /> */}
         </TouchableOpacity>
       </View>
     </View>
