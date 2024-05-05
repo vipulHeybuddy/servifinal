@@ -77,8 +77,7 @@ const useVoiceRecognition = () => {
         {
           headers: {
             "Content-Type": "multipart/form-data",
-            Authorization:
-              "Bearer sk-proj-77qF1V4hLr9eJUeSDzPRT3BlbkFJSmVdqa6ehgsDlpPGHrv0",
+            Authorization: "Bearer ",
           },
         }
       );
