@@ -70,14 +70,14 @@ export default function HomeScreen() {
         </TouchableOpacity>
       </Modal>
       </ScrollView>
-      <TouchableOpacity
-        style={[styles.floatingButton, { backgroundColor: 'orange' }]} // Orange background
+      {/* <TouchableOpacity
+        style={[styles.floatingButton, { backgroundColor: 'orange' }]} 
         onPress={() => setBookingModalVisible(true)}
       >
         <Text style={{ color: 'white', fontSize: 20, textAlign: 'center' }}>
-          <FontAwesome name="microphone" size={24} color="white" /> {/* Mic icon */}
+          <FontAwesome name="microphone" size={24} color="white" /> 
         </Text>
-      </TouchableOpacity>
+      </TouchableOpacity> */}
 
       <Modal 
         visible={bookingModalVisible} 
