@@ -12,6 +12,7 @@ import { styles } from "./styles";
 import { useNavigation } from "@react-navigation/native";
 // import logo from "../../../assets/logo.png";
 
+
 export default function LoginScreen() {
   const navigation = useNavigation();
 
@@ -88,6 +89,7 @@ export default function LoginScreen() {
       </View>
 
       <View style={styles.socialLoginContainer}>
+
         <TouchableOpacity
           style={[styles.socialLoginButton, styles.googleButton]}
         >
@@ -103,6 +105,7 @@ export default function LoginScreen() {
             source={require("../../../assets/Apple.png")}
             style={styles.socialLoginLogo}
           /> */}
+
         </TouchableOpacity>
       </View>
     </View>
