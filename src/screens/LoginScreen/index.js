@@ -3,7 +3,7 @@ import { View, Text, TextInput, TouchableOpacity, Image, Alert } from 'react-nat
 import { styles } from './styles';
 
 import { useNavigation } from "@react-navigation/native";
-import logo from "../../../assets/logo.png";
+// import logo from "../../../assets/logo.png";
 
 
 export default function LoginScreen() {
@@ -45,10 +45,10 @@ export default function LoginScreen() {
 
   return (
     <View style={styles.container}>
-      <Image
+      {/* <Image
         source={logo}
         style={styles.logo}
-      />
+      /> */}
       <Text style={styles.appName}>SERVI!</Text>
       <Text style={styles.tagline}>A REVOLUTION IN DINING</Text>
 
@@ -79,10 +79,10 @@ export default function LoginScreen() {
 
       <View style={styles.socialLoginContainer}>
         <TouchableOpacity style={[styles.socialLoginButton, styles.googleButton]}>
-          <Image source={require('./google.png')} style={styles.socialLoginLogo} />
+          {/* <Image source={require('./google.png')} style={styles.socialLoginLogo} /> */}
         </TouchableOpacity>
         <TouchableOpacity style={[styles.socialLoginButton, styles.appleButton]}>
-          <Image source={require('../../../assets/Apple.png')} style={styles.socialLoginLogo} />
+          {/* <Image source={require('../../../assets/Apple.png')} style={styles.socialLoginLogo} /> */}
         </TouchableOpacity>
       </View>
     </View>
