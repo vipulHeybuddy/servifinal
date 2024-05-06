@@ -90,7 +90,10 @@ const useVoiceCommands = () => {
   const [error, setError] = useState(null);
 
   const processVoiceCommand = (voiceCommand) => {
-    const command = voiceCommand.replace(/[^\w\s?]/gi, '').trim().toLowerCase();
+    const command = voiceCommand
+      .replace(/[^\w\s?]/gi, "")
+      .trim()
+      .toLowerCase();
     console.log(command);
     if (commandActions.hasOwnProperty(command)) {
       const action = commandActions[command];
