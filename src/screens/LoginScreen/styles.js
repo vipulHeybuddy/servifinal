@@ -8,30 +8,32 @@ export const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     paddingHorizontal: 20,
-    backgroundColor: '#2D273F',
+    backgroundColor: 'white',
   },
   logo: {
     width: 100,
     height: 100,
     borderRadius: 50,
+    backgroundColor: '#FDAC42'
   },
   appName: {
-    fontSize: 24,
+    fontSize: 32,
     fontWeight: 'bold',
-    marginTop: 10,
-    color: 'white',
+    marginTop: 15,
+    color: '#FDAC42',
   },
   tagline: {
     fontSize: 16,
     marginTop: 5,
+    fontWeight: 'normal',
     marginBottom: 20,
-    color: 'white',
+    color: '#FDAC42',
   },
   inputContainer: {
     width: '80%',
   },
   inputLabel: {
-    color: 'white',
+    color: 'black',
     marginBottom: 5,
   },
   input: {
@@ -41,7 +43,8 @@ export const styles = StyleSheet.create({
     borderRadius: 5,
     paddingHorizontal: 10,
     marginBottom: 10,
-    color: 'white',
+    color: 'black',
+    backgroundColor: '#FFF1EC',
   },
   loginButton: {
     paddingVertical: 10,
@@ -60,13 +63,13 @@ export const styles = StyleSheet.create({
   registerText: {
     marginTop: 10,
     textAlign: 'center',
-    color: 'white',
+    color: '#8174AA',
   },
   forgotPasswordText: {
     marginTop: 3,
     marginBottom: 20,
     textAlign: 'right',
-    color: 'white',
+    color: '#FDAC42',
   },
   socialLoginContainer: {
     marginTop: 20,

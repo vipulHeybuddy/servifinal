@@ -1,13 +1,18 @@
 import { useState } from "react";
 import { Audio } from "expo-av";
 import axios from "axios";
+import useVoiceCommands from "./useVoiceCommands";
 import * as FileSystem from "expo-file-system";
+import { StyleSheet, View, Text, TouchableWithoutFeedback, Alert, Animated } from "react-native";
+import * as Speech from "expo-speech";
+
 
 const useVoiceRecognition = () => {
   const [recording, setRecording] = useState();
   const [isRecording, setIsRecording] = useState(false);
   const [resultSpeech, setResultSpeech] = useState("");
-
+  const { error, processVoiceCommand } = useVoiceCommands();
+  const [responseAnswer, setResponseAnswer] = useState("");
   async function startRecording() {
     try {
       const permission = await Audio.requestPermissionsAsync();
@@ -47,19 +52,66 @@ const useVoiceRecognition = () => {
   }
 
   async function stopRecording() {
-    setRecording(undefined);
-    await Audio.setAudioModeAsync({
-      allowsRecordingIOS: false,
-    });
-    await recording?.stopAndUnloadAsync();
-    const fileUri = `${FileSystem.documentDirectory}recording${Date.now()}.wav`;
-    await FileSystem.copyAsync({
-      from: recording?.getURI(),
-      to: fileUri,
-    });
-    await translateSpeechToText(fileUri);
-    setIsRecording(false);
+    try {
+      setRecording(undefined);
+      await Audio.setAudioModeAsync({
+        allowsRecordingIOS: false,
+      });
+      await recording?.stopAndUnloadAsync();
+      const fileUri = `${FileSystem.documentDirectory}recording${Date.now()}.wav`;
+      await FileSystem.copyAsync({
+        from: recording?.getURI(),
+        to: fileUri,
+      });
+     const result =  await translateSpeechToText(fileUri);
+     setIsRecording(false);
+     handleQuerySubmit(result);
+      
+    } catch (error) {
+      console.error("Error while stopping recording:", error);
+    }
   }
+
+  const handleQuerySubmit = async (query) => {
+    try {
+      const requestBody = {
+        query: query,
+        visitorId: "clvdsn5wm1nqa8io935om3cpn",
+        conversationId: "clvw8stys000o356uzduzsprx",
+        channel: "dashboard",
+        attachments: [],
+        streaming: false,
+      };
+
+      const response = await fetch(
+        "https://app.chaindesk.ai/api/agents/clvw8skup084eq08ivej1m988/query",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: "Bearer ",
+          },
+          body: JSON.stringify(requestBody),
+        }
+      );
+
+
+      const responseData = await response.json();
+      console.log(" hell1" ,responseData);
+      console.log("hell2", query)
+       processVoiceCommand(query);
+       await speakResponse(responseData.answer);
+       setResponseAnswer(responseData.answer); // Set response answer to state
+    } catch (error) {
+      Alert.alert("Error", "Failed to fetch data. Please try again later.");
+      console.error("Error fetching data:", error);
+    }
+  };
+
+  const speakResponse = async (response) => {
+    const filteredResponse = response.replace(/[\uD800-\uDFFF]./g, "");
+    Speech.speak(filteredResponse);
+  };
 
   async function translateSpeechToText(fileUri) {
     try {
@@ -81,24 +133,30 @@ const useVoiceRecognition = () => {
           },
         }
       );
-      const resultSpeech = response.data;
-      setResultSpeech(resultSpeech);
+      const transcribedText = response.data;
+      setResultSpeech(transcribedText);
+      
+      return transcribedText;
+
     } catch (error) {
       console.error("Transcription failed", error);
-    }
-    try {
-      await FileSystem.deleteAsync(fileUri);
-      console.log(`File ${fileUri} deleted successfully.`);
-    } catch (error) {
-      console.error(`Failed to delete file ${fileUri}: ${error.message}`);
+    } finally {
+      try {
+        await FileSystem.deleteAsync(fileUri);
+        console.log(`File ${fileUri} deleted successfully.`);
+      } catch (error) {
+        console.error(`Failed to delete file ${fileUri}: ${error.message}`);
+      }
     }
   }
+  
 
   return {
     startRecording,
     stopRecording,
     isRecording,
     resultSpeech,
+    responseAnswer
   };
 };
 

@@ -1,77 +1,46 @@
-import React, { useState } from "react";
-import { StyleSheet, View, Text, TouchableWithoutFeedback } from "react-native";
-
+import React, { useState, useEffect, useRef } from "react";
+import { StyleSheet, View, Text, TouchableWithoutFeedback, Alert, Animated } from "react-native";
 import { FontAwesome } from "@expo/vector-icons";
 import useVoiceCommands from "../../hooks/useVoiceCommands";
 import useVoiceRecognition from "../../hooks/useVoiceRecognition";
+import * as Speech from "expo-speech";
 
 const Mic = () => {
-  const { startRecording, stopRecording, isRecording, resultSpeech } =
-    useVoiceRecognition();
-
+  const { startRecording, stopRecording, isRecording, resultSpeech, responseAnswer } = useVoiceRecognition();
   const { error, processVoiceCommand } = useVoiceCommands();
-  const [conversation, setConversation] = useState([]);
-
-  const [recordingResult, setRecordingResult] = useState("");
+  const [showResult, setShowResult] = useState(false); // Initially set to false
+  const animationValue = useRef(new Animated.Value(0)).current;
 
   const handleMicPressIn = () => {
+    setShowResult(false);
     startRecording();
+    animateMicButton(1); // Start animation when pressing the mic button
   };
 
   const handleMicPressOut = () => {
     stopRecording();
-    setRecordingResult(resultSpeech);
-    handleQuerySubmit(resultSpeech);
+    setTimeout(() => {
+      setShowResult(true); // Hide result after a few seconds
+    }, 6000);
+
+    animateMicButton(0); // Stop animation when releasing the mic button
+    setTimeout(() => {
+      setShowResult(false); // Hide result after a few seconds
+    }, 12000); // Adjust the duration as needed (3000 milliseconds = 3 seconds)
   };
 
-  const handleQuerySubmit = async (query) => {
-    try {
-      const requestBody = {
-        // attachments: [],
-        // channel: "dashboard",
-        // conversationId: "clvi1bolz000m356vwathvnn6",
-        // query: query,
-        // streaming: false,
-        // visitorId: "clvdsn5wm1nqa8io935om3cpn",
-        attachments: [],
-        channel: "dashboard",
-        conversationId: "clvpbcwav000o356x916p2ft6",
-        query: query,
-        streaming: false,
-        visitorId: "clvpbcwzg3bpz8iq0267z0j74",
-      };
-
-      const response = await fetch(
-        "https://app.chaindesk.ai/api/agents/clvpbcsmk077so98i7rs9ubck/query",
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: "Bearer 1738fc43-25a5-4877-94ab-b61a8c771adf",
-          },
-          body: JSON.stringify(requestBody),
-        }
-      );
-
-      const responseData = await response.json();
-      //   setConversation((prevConversation) => [
-      //     ...prevConversation,
-      //     { message: query, isUser: true },
-      //     { message: responseData.answer, isUser: false },
-      //   ]);
-      processVoiceCommand(query);
-      await speakResponse(responseData.answer);
-      //
-    } catch (error) {
-      Alert.alert("Error", "Failed to fetch data. Please try again later.");
-      console.error("Error fetching data:", error);
-    }
+  const animateMicButton = (toValue) => {
+    Animated.timing(animationValue, {
+      toValue: toValue,
+      duration: 1000, // Adjust duration as needed
+      useNativeDriver: true,
+    }).start();
   };
 
-  const speakResponse = async (response) => {
-    const filteredResponse = response.replace(/[\uD800-\uDFFF]./g, "");
-    Speech.speak(filteredResponse);
-  };
+  const micButtonScale = animationValue.interpolate({
+    inputRange: [0, 1],
+    outputRange: [1, 1.2], 
+  });
 
   return (
     <>
@@ -79,20 +48,24 @@ const Mic = () => {
         onPressIn={handleMicPressIn}
         onPressOut={handleMicPressOut}
       >
-        <View
+        <Animated.View
           style={[
             styles.microphoneButton,
-            { backgroundColor: isRecording ? "blue" : "orange" }, // Change button color when recording
+            { backgroundColor: isRecording ? "blue" : "orange", transform: [{ scale: micButtonScale }] }, // Apply animation to scale
           ]}
         >
           <Text style={{ color: "white", fontSize: 20 }}>
             <FontAwesome name="microphone" size={24} color="white" />
           </Text>
-        </View>
+        </Animated.View>
       </TouchableWithoutFeedback>
-      <View style={styles.resultContainer}>
-        <Text style={styles.resultText}>Recording Result: {resultSpeech}</Text>
-      </View>
+      {showResult && (
+        <View style={styles.resultContainer}>
+          <View style={styles.resultBackground}>
+            <Text style={styles.resultText}>{responseAnswer}</Text>
+          </View>
+        </View>
+      )}
     </>
   );
 };
@@ -100,8 +73,8 @@ const Mic = () => {
 const styles = StyleSheet.create({
   microphoneButton: {
     position: "absolute",
-    bottom: 80,
-    right: 20,
+    bottom: 45,
+    alignSelf: "center", // Center horizontally
     width: 60,
     height: 60,
     borderRadius: 30,
@@ -110,11 +83,19 @@ const styles = StyleSheet.create({
     elevation: 15,
   },
   resultContainer: {
-    marginVertical: 20,
-    alignItems: "center",
+    position: "absolute",
+    bottom: 120,
+    alignSelf: "center",
+    zIndex: 1, 
+  },
+  resultBackground: {
+    backgroundColor: "rgba(128, 128, 128, 0.9)",
+    padding: 10,
+    borderRadius: 10,
   },
   resultText: {
     fontSize: 18,
+    color: "white",
   },
 });
 

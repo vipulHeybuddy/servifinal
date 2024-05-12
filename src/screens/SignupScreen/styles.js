@@ -6,7 +6,7 @@ export const styles = StyleSheet.create({
     height: "100%",
     justifyContent: "center",
     alignItems: "center",
-    backgroundColor: "#2D273F",
+    backgroundColor: "white",
   },
   logo: {
     width: 100,
@@ -17,29 +17,29 @@ export const styles = StyleSheet.create({
     fontSize: 24,
     fontWeight: "bold",
     marginTop: 10,
-    color: "white",
+    color: "black",
   },
   tagline: {
     fontSize: 16,
     marginTop: 5,
     marginBottom: 20,
-    color: "white",
+    color: "black",
   },
   inputContainer: {
     width: "80%",
   },
   inputLabel: {
-    color: "white",
+    color: "black",
     marginBottom: 5,
   },
   input: {
     height: 40,
-    borderColor: "rgba(90, 78, 126, 1)",
+    borderColor: "grey",
     borderWidth: 1,
     borderRadius: 8,
     paddingHorizontal: 10,
     marginBottom: 10,
-    backgroundColor: "rgba(129, 116, 170, 0.5)",
+    backgroundColor: "#FFF1EC",
   },
   loginButton: {
     paddingVertical: 10,

@@ -70,14 +70,14 @@ export default function ItalianHome() {
         </TouchableOpacity>
       </Modal>
       </ScrollView>
-      <TouchableOpacity
+      {/* <TouchableOpacity
         style={[styles.floatingButton, { backgroundColor: 'orange' }]} // Orange background
         onPress={() => setBookingModalVisible(true)}
       >
         <Text style={{ color: 'white', fontSize: 20, textAlign: 'center' }}>
-          <FontAwesome name="microphone" size={24} color="white" /> {/* Mic icon */}
-        </Text>
-      </TouchableOpacity>
+          <FontAwesome name="microphone" size={24} color="white" />  */}
+        {/* </Text>
+      </TouchableOpacity> */}
 
       <Modal 
         visible={bookingModalVisible} 

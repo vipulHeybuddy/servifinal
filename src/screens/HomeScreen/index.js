@@ -11,6 +11,7 @@ import PromotionalBanner from '../../components/PromotionalBanner';
 import Search from '../../components/Search';
 import SearchScreen from '../SearchScreen';
 import BookingScreen from '../BookigScreen';
+import Mic from '../../components/Mic';
 
 export default function HomeScreen() {
     
@@ -21,6 +22,8 @@ export default function HomeScreen() {
 
   return (
     <>
+       
+
     <ScrollView
       style={{
         backgroundColor: "white",

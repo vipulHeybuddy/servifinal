@@ -8,11 +8,11 @@ import {
   Alert,
 } from "react-native";
 import { styles } from "./styles";
-import { Link, router } from "expo-router";
+// import { Link, router } from "expo-router";
 import DropDownPicker from "react-native-dropdown-picker";
 
 const placeholderColor = "rgba(129, 116, 170, 0.5)";
-const labelColor = "rgba(129, 116, 170, 1)";
+const labelColor = "black";
 const genderOptions = [
   { label: "Male", value: "male" },
   { label: "Female", value: "female" },
@@ -63,17 +63,17 @@ export default function SignupScreen() {
           if (response.ok) {
             console.log("okay h sb kuch");
             // Proceed to OTP modal
-            router.push({
-              pathname: "/otp/OtpModal",
-              params: {
-                fname: firstName,
-                lname: lastName,
-                email: email,
-                gender: gender,
-                password: password,
-                confirmPassword: confirmPassword,
-              },
-            });
+            // router.push({
+            //   pathname: "/otp/OtpModal",
+            //   params: {
+            //     fname: firstName,
+            //     lname: lastName,
+            //     email: email,
+            //     gender: gender,
+            //     password: password,
+            //     confirmPassword: confirmPassword,
+            //   },
+            // });
           } else {
             throw new Error("Failed to fetch OTP");
           }
@@ -148,7 +148,7 @@ export default function SignupScreen() {
           setItems={setGenderData}
           placeholder={"Select"}
           style={{
-            backgroundColor: "rgba(129, 116, 170, 0.5)",
+            backgroundColor: "#FFF1EC",
             borderColor: "rgba(90, 78, 126, 1)",
           }}
           textStyle={{
@@ -192,7 +192,7 @@ export default function SignupScreen() {
         </TouchableOpacity>
         <Text style={styles.registerText}>
           Already have an account?
-          <Link href="loginpage/LoginScreen"> Login</Link>
+          {/* <Link href="loginpage/LoginScreen"> Login</Link> */}
         </Text>
       </View>
     </View>

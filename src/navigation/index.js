@@ -2,6 +2,7 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import LoginScreen from '../screens/LoginScreen';
+import SignupScreen from '../screens/SignupScreen';
 import HomeScreen from '../screens/HomeScreen';
 import RestaurantDetailsScreen from '../screens/RestaurantDetailsScreen';
 import DishDetailsScreen from '../screens/DishDetailsScreen';
@@ -23,6 +24,7 @@ return (
         // }}
     >
           <Stack.Screen name="Login" component={LoginScreen} />
+          <Stack.Screen name="Signup" component={SignupScreen} />
          <Stack.Screen 
             name="Home" 
             component={TabNavigation}

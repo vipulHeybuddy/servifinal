@@ -70,15 +70,15 @@ const DishDetailsScreen = () => {
         </Pressable>
       </View>
 
-      <TouchableOpacity
+      {/* <TouchableOpacity
         style={[styles.floatingButton, { backgroundColor: "orange" }]} // Orange background
         onPress={() => setBookingModalVisible(true)}
       >
         <Text style={{ color: "white", fontSize: 20, textAlign: "center" }}>
           <FontAwesome name="microphone" size={24} color="white" />{" "}
-          {/* Mic icon */}
+         
         </Text>
-      </TouchableOpacity>
+      </TouchableOpacity> */}
 
       <Modal
         visible={bookingModalVisible}

@@ -18,14 +18,14 @@ const OrdersScreen = () => {
           renderItem={({ item }) => <OrderListItem order={item} />}
         />
 
-<TouchableOpacity
+{/* <TouchableOpacity
         style={[styles.floatingButton, { backgroundColor: 'orange' }]} // Orange background
         onPress={() => setBookingModalVisible(true)}
       >
         <Text style={{ color: 'white', fontSize: 20, textAlign: 'center' }}>
-          <FontAwesome name="microphone" size={24} color="white" /> {/* Mic icon */}
+          <FontAwesome name="microphone" size={24} color="white" /> 
         </Text>
-      </TouchableOpacity>
+      </TouchableOpacity> */}
 
       <Modal 
         visible={bookingModalVisible} 
