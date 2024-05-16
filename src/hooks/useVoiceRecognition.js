@@ -51,26 +51,49 @@ const useVoiceRecognition = () => {
     }
   }
 
+  // async function stopRecording() {
+  //   try {
+  //     setRecording(undefined);
+  //     await Audio.setAudioModeAsync({
+  //       allowsRecordingIOS: false,
+  //     });
+  //     await recording?.stopAndUnloadAsync();
+  //     const fileUri = `${FileSystem.documentDirectory}recording${Date.now()}.wav`;
+  //     await FileSystem.copyAsync({
+  //       from: recording?.getURI(),
+  //       to: fileUri,
+  //     });
+  //    const result =  await translateSpeechToText(fileUri);
+  //    setIsRecording(false);
+  //    handleQuerySubmit(result);
+      
+  //   } catch (error) {
+  //     console.error("Error while stopping recording:", error);
+  //   }
+  // }
   async function stopRecording() {
     try {
-      setRecording(undefined);
-      await Audio.setAudioModeAsync({
-        allowsRecordingIOS: false,
-      });
-      await recording?.stopAndUnloadAsync();
+      if (!recording) {
+        console.warn("No recording available to stop.");
+        return;
+      }
+  
+      await recording.stopAndUnloadAsync();
+  
       const fileUri = `${FileSystem.documentDirectory}recording${Date.now()}.wav`;
-      await FileSystem.copyAsync({
-        from: recording?.getURI(),
+      await FileSystem.moveAsync({
+        from: recording.getURI(),
         to: fileUri,
       });
-     const result =  await translateSpeechToText(fileUri);
-     setIsRecording(false);
-     handleQuerySubmit(result);
-      
+  
+      const result = await translateSpeechToText(fileUri);
+      setIsRecording(false);
+      handleQuerySubmit(result);
     } catch (error) {
       console.error("Error while stopping recording:", error);
     }
   }
+  
 
   const handleQuerySubmit = async (query) => {
     try {
@@ -94,7 +117,7 @@ const useVoiceRecognition = () => {
           body: JSON.stringify(requestBody),
         }
       );
-
+      //0ff4bac5-cd99-434e-ab5d-f408c11759f3
 
       const responseData = await response.json();
       console.log(" hell1" ,responseData);
@@ -133,6 +156,7 @@ const useVoiceRecognition = () => {
           },
         }
       );
+      //sk-proj-rtw5oP2UyhV3cjbFoc5lT3BlbkFJs6SjUUGjILJx50mOxmwk
       const transcribedText = response.data;
       setResultSpeech(transcribedText);
       

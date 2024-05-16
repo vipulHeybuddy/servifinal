@@ -7,15 +7,15 @@ export default function Navigate() {
   const isFocused = useIsFocused();
   const [showMic, setShowMic] = useState(false);
   
-  useEffect(() => {
-    const currentScreen = navigation?.getCurrentRoute()?.name;
-    const screensToShowMic = ["Home", "Início", "Basket", "Profile"];
-    setShowMic(isFocused && screensToShowMic.includes(currentScreen));
-  }, [navigation, isFocused]);
+//   useEffect(() => {
+//     const currentScreen = navigation?.getCurrentRoute()?.name;
+//     const screensToShowMic = ["Home", "Início", "Basket", "Profile"];
+//     setShowMic(isFocused && screensToShowMic.includes(currentScreen));
+//   }, [navigation, isFocused]);
 
   return (
     <>
-      {showMic && <Mic />}
+     <Mic />
     </>         
   );
 }

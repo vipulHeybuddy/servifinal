@@ -6,7 +6,7 @@ import Navigation from "./src/navigation";
 import { Provider , useSelector } from "react-redux";
 import store from "./src/redux/store";
 import Mic from "./src/components/Mic";
-import Navigate from "./Navigate";
+ import Navigate from "./Navigate";
 
 
 

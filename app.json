@@ -11,9 +11,6 @@
       "resizeMode": "cover",
       "backgroundColor": "#ffffff"
     },
-    
-  
-    
     "updates": {
       "fallbackToCacheTimeout": 0
     },
@@ -27,10 +24,16 @@
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#FFFFFF"
-      }
+      },
+      "package": "com.vipull7.Delivery"
     },
     "web": {
       "favicon": "./assets/favicon.png"
+    },
+    "extra": {
+      "eas": {
+        "projectId": "84834ec9-734d-4d8d-9734-f2c52dfc9381"
+      }
     }
   }
 }
